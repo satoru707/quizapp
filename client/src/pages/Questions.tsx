@@ -17,7 +17,7 @@ interface Question {
 }
 
 const Questions: React.FC = () => {
-  const { questions = [], currentSession, file } = useStudy();
+  const { questions = [], currentSession, file, saveSession } = useStudy();
   const navigate = useNavigate();
   const [showTypeFilter, setShowTypeFilter] = useState<
     "all" | "objective" | "theory"
@@ -45,6 +45,7 @@ const Questions: React.FC = () => {
         id: q.id || Math.random().toString(36).substring(2, 9),
         text: q.text || "",
         answer: q.answer || "",
+        options: q.options || [],
         explanation: q.explanation,
         type: q.type || "objective",
         idx: q.idx,
@@ -60,6 +61,8 @@ const Questions: React.FC = () => {
     if (safeQuestions.length === 0 && !currentSession) {
       navigate("/");
     }
+    saveSession();
+    console.log(currentSession, "currentSession");
   }, [safeQuestions, currentSession, navigate]);
   const handleDownloadPdf = () => {
     if (displayedQuestions.length === 0) {

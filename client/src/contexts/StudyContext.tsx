@@ -26,6 +26,7 @@ export interface Question {
   id: string;
   text: string;
   answer: string;
+  options: string[];
   explanation: string;
   type: "objective" | "theory";
 }
@@ -75,7 +76,6 @@ export const StudyProvider: React.FC<{ children: React.ReactNode }> = ({
 
     setLoading(true);
     setError(null);
-
     try {
       const objectiveCount =
         questionType === "theory" ? 0 : numObjectiveQuestions;
@@ -87,8 +87,10 @@ export const StudyProvider: React.FC<{ children: React.ReactNode }> = ({
         objectiveCount,
         theoryCount
       );
+      console.log("Generated Questions:", generatedQuestions);
 
       setQuestions(generatedQuestions);
+      //questions
 
       const newSession: StudySession = {
         id: Date.now().toString(),
@@ -102,6 +104,8 @@ export const StudyProvider: React.FC<{ children: React.ReactNode }> = ({
       };
 
       setCurrentSession(newSession);
+      console.log("New Session:", newSession);
+      // setHistory((prevHistory) => [newSession, ...prevHistory]);
     } catch (err) {
       setError("Failed to generate questions. Please try again.");
       console.error(err);
@@ -112,9 +116,14 @@ export const StudyProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const saveSession = () => {
     if (currentSession) {
+      console.log("Saving session:", currentSession);
+      console.log(getFromLocalStorage("study-history"));
       const updatedHistory = [currentSession, ...history];
       setHistory(updatedHistory);
       saveToLocalStorage("study-history", updatedHistory);
+      console.log(updatedHistory);
+
+      setCurrentSession(null);
     }
   };
 

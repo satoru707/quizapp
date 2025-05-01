@@ -11,6 +11,11 @@ export const saveToLocalStorage = (key: string, data: any): void => {
 export const getFromLocalStorage = (key: string): any => {
   try {
     const item = localStorage.getItem(key);
+    if (!item) {
+      console.log("No item found in localStorage for key:", key);
+      return null;
+    }
+    console.log(JSON.parse(item), "item");
     return item ? JSON.parse(item) : null;
   } catch (error) {
     console.error("Error getting from localStorage:", error);
@@ -23,6 +28,8 @@ export const deleteHistoryItem = (id: string): StudySession[] => {
     const history =
       (getFromLocalStorage("study-history") as StudySession[]) || [];
     const updatedHistory = history.filter((item) => item.id !== id);
+    console.log(updatedHistory, "updatedHistory");
+    // Save the updated history back to local storage
     saveToLocalStorage("study-history", updatedHistory);
     return updatedHistory;
   } catch (error) {

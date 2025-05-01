@@ -9,23 +9,26 @@ const History: React.FC = () => {
   const { history, setQuestions, setCurrentSession } = useStudy();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
+  const [updatedHistory, setUpdatedHistory] = useState(history);
 
   const loadSession = (sessionId: string) => {
     const session = history.find((s) => s.id === sessionId);
     if (session) {
       setQuestions(session.questions);
-      setCurrentSession(session);
       navigate("/questions");
     }
   };
 
   const handleDelete = (sessionId: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    const updatedHistory = deleteHistoryItem(sessionId);
+    const updatedHistor = deleteHistoryItem(sessionId);
+    console.log("Deleted session with ID:", sessionId);
     setCurrentSession(null);
+    setUpdatedHistory(updatedHistor);
+    navigate("/history");
   };
 
-  const filteredHistory = history.filter((session) =>
+  const filteredHistory = updatedHistory.filter((session) =>
     session.filename.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -74,7 +77,7 @@ const History: React.FC = () => {
                           session.questionType.slice(1)}
                     </span>
                     <span className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full">
-                      {session.questions?.length} questions
+                      {session.questions.length} questions
                     </span>
                   </div>
                 </div>

@@ -11,6 +11,7 @@ const GenerateButton: React.FC<GenerateButtonProps> = ({ onSuccess }) => {
 
   const handleGenerate = async () => {
     await generateStudyQuestions();
+
     if (onSuccess) onSuccess();
   };
 

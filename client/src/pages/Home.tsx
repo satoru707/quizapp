@@ -56,7 +56,7 @@ const Home: React.FC = () => {
                 <span className="bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 h-6 w-6 rounded-full flex items-center justify-center mr-3 shrink-0">
                   1
                 </span>
-                <p>Upload any document file (PDF, DOCX, or TXT)</p>
+                <p>Upload any document file (PDF, DOCX, PPTX or TXT)</p>
               </li>
               <li className="flex">
                 <span className="bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 h-6 w-6 rounded-full flex items-center justify-center mr-3 shrink-0">

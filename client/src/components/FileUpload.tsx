@@ -65,7 +65,7 @@ const FileUpload: React.FC = () => {
               : "Drag & drop your file here, or click to select"}
           </p>
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-            Supported formats: PDF, DOCX, DOC, TXT
+            Supported formats: PDF, DOCX, DOC, PPTX, TXT
           </p>
         </div>
       ) : (
