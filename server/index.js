@@ -205,9 +205,7 @@ async function generateAIQuestions(text, type, objectiveCount, theoryCount) {
     Here are random sections from the text to help generate diverse questions:
     ${Array.from({ length: 5 }, () => getRandomContext()).join("\n\n---\n\n")}`;
 
-    const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-pro-latest",
-    });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
